@@ -42,7 +42,7 @@ def get_genres_lastfm(artist_name, api_key):
         #gets the most important 3 genres
         top_3_tags = tags[:3]
         for tag in top_3_tags:
-            genre_name = tag["name"].lower()
+            genre_name = tag["name"].lower().replace("-", " ").strip()
             genres.append(genre_name)
     except KeyError:
         return []

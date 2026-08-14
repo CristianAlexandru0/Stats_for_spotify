@@ -13,8 +13,8 @@ def get_all_genres_simultaneous(artists, api_key):
     # submit doesn't wait for the function to return (it will execute in the background)
     for artist in artists:
         task = executor.submit(get_genres_lastfm, artist["name"], api_key)
-        tasks.append(task)\
-    # waits for all the threads to finis and syncs the result of the function (task.result) in the artist genres
+        tasks.append(task)
+    # waits for all the threads to finish and syncs the result of the function (task.result) in the artist genres
     # zip function asociates every artist with his task in order
     for artist, task in zip(artists, tasks):
         artist["genres"] = task.result()
@@ -92,7 +92,7 @@ def cosinus_affinity(vector1, vector2):
     dot_product = np.dot(vector1, vector2)
 
     affinity = dot_product / (norm_vector1 * norm_vector2)
-    return(affinity)
+    return affinity
 
     
     

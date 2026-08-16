@@ -13,7 +13,6 @@ if "access_token" not in st.session_state or st.session_state["access_token"] ==
 access_token = st.session_state["access_token"]
 
 st.markdown("# Your top artists")
-st.write("")
 
 # displays more options of date to choose from
 time_range_choice = st.radio("",

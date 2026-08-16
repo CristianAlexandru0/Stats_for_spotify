@@ -13,7 +13,6 @@ if "access_token" not in st.session_state or st.session_state["access_token"] ==
 access_token = st.session_state["access_token"]
 
 st.markdown("# Your top tracks")
-st.write("")
 
 
 # displays more options of date to choose from
@@ -49,10 +48,14 @@ with st.spinner("Loading..."):
             image_url = "default.png"
         link = track["external_urls"]["spotify"]
         artist = track["artists"][0]["name"]
-        found_tracks.append((track["name"], image_url, link, artist))
+        if len(track["artists"]) > 1:
+            second_artist = track["artists"][1]["name"]
+        else:
+            second_artist = None
+        found_tracks.append((track["name"], image_url, link, artist, second_artist))
 
 # displays the tracks and their data
-for i, (name, image_url, link, artist) in enumerate(found_tracks, start = 1):
+for i, (name, image_url, link, artist, second_artist) in enumerate(found_tracks, start = 1):
     col1,col2 = st.columns([1, 5])
     col1.image(image_url, width = 120)
     # makes the name look better and green and displays it
@@ -60,9 +63,13 @@ for i, (name, image_url, link, artist) in enumerate(found_tracks, start = 1):
         f"### {i}. <a href='{link}' target='_blank' style='color:#0D5C33; text-decoration:none;'>{name}</a>",
         unsafe_allow_html=True
     )
+    if second_artist:
+        artist_txt = f"{artist}, {second_artist}"
+    else:
+        artist_txt = artist
     # makes the caption look better and green and displays it
     col2.markdown(
-    f"<p style='font-size:16px; color:#0D5C33; margin-top:-10px;'>{artist}</p>",
+    f"<p style='font-size:16px; color:#0D5C33; margin-top:-10px;'>{artist_txt}</p>",
     unsafe_allow_html=True
     )
     st.divider()

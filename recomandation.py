@@ -21,9 +21,10 @@ def get_all_genres_simultaneous(artists, api_key):
     # free the resources
     executor.shutdown()
 
-@st.cache_data
+
 # requests the data of an artist from last.fm 
 # and adds the genres of the artist to a list
+@st.cache_data
 def get_genres_lastfm(artist_name, api_key):
     response = requests.get(
          "http://ws.audioscrobbler.com/2.0/",

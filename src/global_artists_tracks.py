@@ -54,9 +54,9 @@ def get_artist_image_spotify(artist_name, token):
         # if there is no match, the first image is taken
         return items[0]["images"][0]["url"], items[0]["external_urls"]["spotify"]
     except KeyError:
-        return "default.png", None
+        return "assets/default.png", None
     except TypeError:
-        return "default.png", None
+        return "assets/default.png", None
 
 # get the images from spotify for tracks
 @st.cache_data
@@ -81,6 +81,6 @@ def get_track_image_spotify(track_name, artist_name, access_token):
             # if there is no match, the first image is taken, and it's url
         return items[0]["album"]["images"][0]["url"], items[0]["external_urls"]["spotify"]
     except KeyError:
-        return "default.png", None
+        return "assets/default.png", None
     except TypeError:
-        return "default.png", None
+        return "assets/default.png", None

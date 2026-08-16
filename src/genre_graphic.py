@@ -26,5 +26,5 @@ def show_graph(top_7_genres,third_column):
 
     )
     
-    third_column.plotly_chart(graphic, use_container_width=True)
+    third_column.plotly_chart(graphic, width="stretch")
     return third_column

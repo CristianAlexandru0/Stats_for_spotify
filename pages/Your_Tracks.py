@@ -1,6 +1,6 @@
 import streamlit as st
 import requests 
-from sidebar import sidebar_construct
+from src.sidebar import sidebar_construct
 
 # displays and customizes the sidebar
 sidebar_construct()
@@ -45,7 +45,7 @@ with st.spinner("Loading..."):
         if track["album"]["images"] != []:
             image_url = track["album"]["images"][0]["url"]
         else:
-            image_url = "default.png"
+            image_url = "assets/default.png"
         link = track["external_urls"]["spotify"]
         artist = track["artists"][0]["name"]
         if len(track["artists"]) > 1:

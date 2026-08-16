@@ -1,7 +1,8 @@
 import streamlit as st
 import requests
 from config import Id, Client, Redirect, LastFmKey
-from sidebar import sidebar_construct
+from src.sidebar import sidebar_construct
+
 # displays and customizes the sidebar
 sidebar_construct()
 
@@ -66,7 +67,7 @@ else:
     account_sub = profile_data["product"].title()
 
     # creates the table
-    first_column, second_column = st.columns([1,3])
+    first_column, second_column, third_column = st.columns([1,2,1])
     st.divider()
 
     # extracts the image
@@ -75,7 +76,7 @@ else:
         first_column.image(image_url, width = 180)
     else:
         # if there is no image it will put a default one
-       first_column.image("default.png",width = 180)
+       first_column.image("assets/default.png",width = 180)
 
     # puts the data in the second column
     second_column.markdown(f"## Hello, {account_name}!")
@@ -85,8 +86,8 @@ else:
     second_subcol.metric(label = "Followers", value = account_followers)
 
     # RECOMANDATIONS    
-    from recomandation import get_genres_lastfm, get_all_genres_simultaneous, collect_genres
-    from recomandation import build_profile, transfrom_to_vector, cosinus_affinity 
+    from src.recomandation import get_genres_lastfm, get_all_genres_simultaneous, collect_genres
+    from src.recomandation import build_profile, transfrom_to_vector, cosinus_affinity 
     # 'spinner' adds a loading bar while the program is finding the artists
     with st.spinner("Loading..."):
         artists_response = requests.get(
@@ -115,21 +116,26 @@ else:
         count = Counter(all_top_artists_genres)
 
         # gets the top 4 most listened genres in pairs like "name":"count"
-        top_8_pairs = count.most_common(8)
+        top_7_pairs = count.most_common(7)
 
-        top_8_genres = []
+        # displays a genre chart
+        from src.genre_graphic import show_graph
+
+        show_graph(top_7_pairs, third_column)
+
+        top_7_genres = []
         # gets the top 4 most listened genres names
-        for pair in top_8_pairs:
+        for pair in top_7_pairs:
             genre_name = pair[0]
-            top_8_genres.append(genre_name)
+            top_7_genres.append(genre_name)
 
         found_artists = []
-        # extacts 7 artists from each most listened genre
-        for genre in top_8_genres: 
+        # extacts 10 artists from each most listened genre
+        for genre in top_7_genres: 
             response = requests.get(
                 "https://api.spotify.com/v1/search",
                 headers={"Authorization": f"Bearer {access_token}"},
-                params={"q": f'genre:"{genre}"', "type": "artist", "limit": 7}
+                params={"q": f'genre:"{genre}"', "type": "artist", "limit": 10}
             )
             data = response .json()
             try:
@@ -160,7 +166,7 @@ else:
                     if artist["images"]:
                         image_url = artist["images"][0]["url"]
                     else:
-                        image_url = "default.png"
+                        image_url = "assets/default.png"
                     # appends to a list of dictionaries the data of the artist
                     recomended_artist.append({
                         "name": artist["name"],
@@ -180,14 +186,14 @@ else:
          with st.spinner("Loading..."):
             recomendation_row = st.columns(10)
             for i, recomendation in enumerate(recomended_artist[:10]):
-                recomendation_row[i].image(recomendation["image"], use_container_width = True)
+                recomendation_row[i].image(recomendation["image"], width="stretch")
                 recomendation_row[i].markdown(f"[{recomendation['name']}]({recomendation['link']})")
                 recomendation_row[i].caption(f"Similarity:{int(recomendation['score'] * 100)}%")
     else:
         st.info("We didn t find enough recomandations for you")
 
-    from global_artists_tracks import get_global_artists, get_global_tracks
-    from global_artists_tracks import get_artist_image_spotify, get_track_image_spotify
+    from src.global_artists_tracks import get_global_artists, get_global_tracks
+    from src.global_artists_tracks import get_artist_image_spotify, get_track_image_spotify
     #returns top 10 most listened artists
     top_global_artists = get_global_artists(LastFmKey)
     # returns top 10 most listened songs
@@ -207,7 +213,7 @@ else:
         # displays the top 10 global artists in a 10-column layout
         artists_row = st.columns(10)
         for i, (name, image_url, spotify_url) in enumerate(found_artists):
-            artists_row[i].image(image_url, use_container_width = True)
+            artists_row[i].image(image_url, width="stretch")
             artists_row[i].markdown(f"[{name}]({spotify_url})")
 
     # searches top trending tracks
@@ -222,7 +228,7 @@ else:
         # displays the top 10 global tracks in a 10-column layout
         track_row = st.columns(10)
         for i, (name, image_url, spotify_url, artist) in enumerate(found_tracks):
-            track_row[i].image(image_url, use_container_width=True)
+            track_row[i].image(image_url, width="stretch")
             track_row[i].markdown(f"[{name}]({spotify_url})")
             track_row[i].caption(f"{artist}")
         

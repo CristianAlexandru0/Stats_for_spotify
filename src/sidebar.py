@@ -49,7 +49,7 @@ def sidebar_construct():
     st.sidebar.link_button(
         "GitHub Source", 
         "https://github.com/CristianAlexandru0/Stats_for_spotify", 
-        width=True
+        width="stretch"
     )
    
     st.sidebar.caption("Made with Streamlit + Spotify and Last.fm API ")

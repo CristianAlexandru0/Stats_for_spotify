@@ -1,7 +1,12 @@
 import streamlit as st
 import requests
-from config import Id, Client, Redirect, LastFmKey
 from src.sidebar import sidebar_construct
+
+# gets the api keys and secrets from streamlit secrets
+Id = st.secrets["Id"]
+Client = st.secrets["Client"]
+Redirect = st.secrets["Redirect"]
+LastFmKey = st.secrets["LastFmKey"]
 
 # displays and customizes the sidebar
 sidebar_construct()

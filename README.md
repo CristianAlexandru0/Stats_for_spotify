@@ -6,7 +6,7 @@ trending artists and tracks worldwide.
 
 It is built with Python, Streamlit, Spotify and Last.fm API.
 
-**[Try it here](https://stats-for-spotify.streamlit.app/)**
+🔗**[Try it here](https://stats-for-spotify.streamlit.app/)**
 
 ---
 
@@ -41,7 +41,9 @@ and a value of 1, that it is not)
 that are tagged with them
 4. Every candidate artist's genres are turned into a vector and compared to the 
 user's genre profile using cosine similarity
+
 ![Cosine similarity formula](assets/formula.png)
+
 5. Finally, they are sorted by score affinity and show the top 10
 
 

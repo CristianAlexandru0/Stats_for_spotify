@@ -1,7 +1,6 @@
-# translates most popular genres from Last.fm to spotify genres
+# translates most popular genres from Last.fm to Spotify genres
 def normalize_lastfm_genres(lastfm_genres):
     genre_mapp = {
-        "hip hop": "hip hop",
         "hip-hop": "hip hop",
         "rnb": "r&b",
         "r and b": "r&b",
@@ -11,7 +10,6 @@ def normalize_lastfm_genres(lastfm_genres):
         "alternative": "alternative rock", 
         "alt rock": "alternative rock",
         "post punk": "post-punk",
-        "nu-metal": "nu metal",
         "heavy metal": "metal",
         "electronic": "edm",
         "electronica": "edm",
@@ -25,11 +23,9 @@ def normalize_lastfm_genres(lastfm_genres):
         "jpop": "j-pop",
         "japanese pop": "j-pop",
         "romanian": "romanian pop", 
-        "romanian hip hop": "romanian rap",
-        "romanian hip-hop": "romanian rap",
+        "romanian hip-hop": "romanian hip hop",
         "ro rap": "romanian rap",
         "ro trap": "romanian trap",
-        "romanian rock": "romanian rock",
         "romanian house": "romanian electronic",
         "ost": "soundtrack",
         "soundtracks": "soundtrack",
@@ -39,15 +35,14 @@ def normalize_lastfm_genres(lastfm_genres):
 
     normalized_genres = []
     for genre in lastfm_genres:
-        # Curățăm spațiile și facem litere mici
         gen = genre.lower().strip()
 
-        # if it is not in the dictionary then it returns the genre without modificating it
+        # if it is not in the dictionary then it returns the genre without modifying it
         transf_genre = genre_mapp.get(gen, gen)
 
         # if the genre not in the list it adds it
         if transf_genre not in normalized_genres:
             normalized_genres.append(transf_genre)
-            
+
     # returns the list
     return normalized_genres

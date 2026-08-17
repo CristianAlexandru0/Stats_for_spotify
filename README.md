@@ -5,10 +5,18 @@ its top artists, tracks and genres, personalizes artist recommendations plus
 trending artists and tracks worldwide.
 
 It is built with Python, Streamlit, Spotify and Last.fm API.
+**[Try it here](https://stats-for-spotify.streamlit.app/)**
+
+---
+
 ![Dashboard](assets/dashboard.png)
+
 ---
 
 ![User's artists](assets/artists.png)
+
+---
+
 ## What it does
 
 - Logs in with the user's Spotify account using an OAuth flow written manually with 

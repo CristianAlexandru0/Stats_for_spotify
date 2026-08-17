@@ -2,7 +2,7 @@ import numpy as np
 import requests
 import streamlit as st
 from concurrent.futures import ThreadPoolExecutor
-
+from normalize_genres import normalize_lastfm_genres
 # because executing one by one the api requests take a long time
 # this function will help with executing the requests simultaneous
 def get_all_genres_simultaneous(artists, api_key):
@@ -49,7 +49,7 @@ def get_genres_lastfm(artist_name, api_key):
         return []
     except TypeError:
         return []
-    return genres
+    return normalize_lastfm_genres(genres)
     
 # collects all the genres from the user's top artists
 def collect_genres(top_artists):

@@ -8,6 +8,10 @@ It is built with Python, Streamlit, Spotify and Last.fm API.
 
 🔗 **[Try it here](https://stats-for-spotify.streamlit.app/)**
 
+> **Note:** This app is in Spotify's Development Mode, so only manually 
+> approved accounts can log in. If you'd like to try it, message me your 
+> Spotify account email and I'll add you as a test user.
+
 ---
 
 ![Dashboard](assets/dashboard.png)

@@ -26,12 +26,12 @@ It is built with Python, Streamlit, Spotify and Last.fm API.
 
 - Logs in with the user's Spotify account using an OAuth flow written manually with 
 requests
-- shows users's top artists and top tracks, with option available to choose the time range
+- Shows users's top artists and top tracks, with option available to choose the time range
 (4 weeks/6 monnths/all time)
-- shows user name, profile picture, subscription followers and build a pie chart of the
+- Shows user name, profile picture, subscription followers and build a pie chart of the
 user's top genres
-- shows a recomandation row of ten recomended new artists (using algebra)
-- shows top 10 trending artists and tracks worldwide with the help of Last.fm API
+- Shows a recomandation row of ten recomended new artists (using algebra)
+- Shows top 10 trending artists and tracks worldwide with the help of Last.fm API
 
 ---
 

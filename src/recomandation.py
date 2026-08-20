@@ -1,8 +1,8 @@
 import numpy as np
 import requests
 import streamlit as st
-from src.concurrent.futures import ThreadPoolExecutor
-from normalize_genres import normalize_lastfm_genres
+from concurrent.futures import ThreadPoolExecutor
+from src.normalize_genres import normalize_lastfm_genres
 # because executing one by one the api requests take a long time
 # this function will help with executing the requests simultaneous
 def get_all_genres_simultaneous(artists, api_key):

@@ -1,7 +1,7 @@
 import numpy as np
 import requests
 import streamlit as st
-from concurrent.futures import ThreadPoolExecutor
+from src.concurrent.futures import ThreadPoolExecutor
 from normalize_genres import normalize_lastfm_genres
 # because executing one by one the api requests take a long time
 # this function will help with executing the requests simultaneous
